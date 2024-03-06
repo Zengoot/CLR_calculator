@@ -86,6 +86,10 @@ namespace FirstCLRProject {
 	private: bool is_equal = false;
 
 
+
+	public: bool mov = false;
+	public: int DownMouseX, DownMouseY;
+
 	protected:
 
 
@@ -359,6 +363,7 @@ namespace FirstCLRProject {
 			// button_ac
 			// 
 			this->button_ac->BackColor = System::Drawing::SystemColors::Desktop;
+			this->button_ac->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->button_ac->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->button_ac->Location = System::Drawing::Point(199, 161);
 			this->button_ac->Name = L"button_ac";
@@ -372,8 +377,9 @@ namespace FirstCLRProject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AutoValidate = System::Windows::Forms::AutoValidate::EnableAllowFocusChange;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(361, 513);
+			this->ClientSize = System::Drawing::Size(360, 520);
 			this->Controls->Add(this->button_divide);
 			this->Controls->Add(this->button_percent);
 			this->Controls->Add(this->button_pdm);
@@ -398,9 +404,13 @@ namespace FirstCLRProject {
 			this->ForeColor = System::Drawing::SystemColors::Control;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->ImeMode = System::Windows::Forms::ImeMode::On;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Calculator";
+			this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseDown);
+			this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseMove);
+			this->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseUp);
 			this->ResumeLayout(false);
 
 		}
@@ -429,23 +439,27 @@ namespace FirstCLRProject {
 	}
 
 	private: System::Void button_divide_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!this->lable_result->Text == ' ')
 		math_action('/');
 	}
 	
 	private: System::Void button_multiply_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!this->lable_result->Text == ' ')
 		math_action('*');
 	}
 	
 	private: System::Void button_minus_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!this->lable_result->Text == ' ')
 		math_action('-');
 	}
 	
 	private: System::Void button_plus_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!this->lable_result->Text == ' ')
 		math_action('+');
 	}
 	private: System::Void button_result_Click(System::Object^  sender, System::EventArgs^  e) {
 		// фикс нажатия на равно при 1-м введенном числе
-		if (user_action == ' ')
+		if (user_action == ' ' || this->lable_result->Text == " ")
 			return;
 		float second = System::Convert::ToDouble(this->lable_result->Text);
 		switch (this->user_action)
@@ -503,6 +517,29 @@ namespace FirstCLRProject {
 	private: System::Void button_dot_Click(System::Object^  sender, System::EventArgs^  e) {
 		if(!this->lable_result->Text->Contains(","))
 		this->lable_result->Text = this->lable_result->Text + ",";
+	}
+	
+	private: System::Void MyForm_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		if (e->Button == System::Windows::Forms::MouseButtons::Left) {
+			mov = true;
+			DownMouseX = e->X;
+			DownMouseY = e->Y;
+		}
+	}
+
+	private: System::Void MyForm_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		if (mov) {
+			Point curpos;
+			curpos.X = this->Location.X + (e->X - DownMouseX);
+			curpos.Y = this->Location.Y + (e->Y - DownMouseY);
+			this->Location = curpos;
+		}
+	}
+
+	private: System::Void MyForm_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		if (e->Button == System::Windows::Forms::MouseButtons::Left) {
+			mov = false;
+		}
 	}
 };
 }
