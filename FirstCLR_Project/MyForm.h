@@ -438,7 +438,7 @@ namespace FirstCLRProject {
 		this->user_action = action;
 		this->lable_result->Text = " ";
 	}
-
+	// action buttons:
 	private: System::Void button_divide_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (this->lable_result->Text == " " || this->lable_result->Text == "0") {
 			this->lable_result->Text = "0";
