@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 
 namespace FirstCLRProject {
 
@@ -439,22 +440,42 @@ namespace FirstCLRProject {
 	}
 
 	private: System::Void button_divide_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!this->lable_result->Text == ' ')
+		if (this->lable_result->Text == " " || this->lable_result->Text == "0") {
+			this->lable_result->Text = "0";
+			this->first_num = 0;
+			this->user_action = ' ';
+			this->is_equal = false;
+		}
 		math_action('/');
 	}
 	
 	private: System::Void button_multiply_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!this->lable_result->Text == ' ')
+		if (this->lable_result->Text == " " || this->lable_result->Text == "0") {
+			this->lable_result->Text = "0";
+			this->first_num = 0;
+			this->user_action = ' ';
+			this->is_equal = false;		
+		}
 		math_action('*');
 	}
 	
 	private: System::Void button_minus_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!this->lable_result->Text == ' ')
+		if (this->lable_result->Text == " " || this->lable_result->Text == "0") {
+			this->lable_result->Text = "0";
+			this->first_num = 0;
+			this->user_action = ' ';
+			this->is_equal = false;
+		}
 		math_action('-');
 	}
 	
 	private: System::Void button_plus_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!this->lable_result->Text == ' ')
+		if (this->lable_result->Text == " " || this->lable_result->Text == "0") {
+			this->lable_result->Text = "0";
+			this->first_num = 0;
+			this->user_action = ' ';
+			this->is_equal = false;
+		}
 		math_action('+');
 	}
 	private: System::Void button_result_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -541,5 +562,6 @@ namespace FirstCLRProject {
 			mov = false;
 		}
 	}
+	
 };
 }
