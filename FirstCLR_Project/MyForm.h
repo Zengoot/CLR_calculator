@@ -11,7 +11,6 @@ namespace FirstCLRProject {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -20,13 +19,12 @@ namespace FirstCLRProject {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: Г¤Г®ГЎГ ГўГјГІГҐ ГЄГ®Г¤ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г 
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
 		/// </summary>
 		~MyForm()
 		{
@@ -81,7 +79,7 @@ namespace FirstCLRProject {
 
 	private: System::Windows::Forms::Button^  button_ac;
 
-	//Переменные для обработки вычислений
+	//ГЏГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ Г¤Г«Гї Г®ГЎГ°Г ГЎГ®ГІГЄГЁ ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГ©
 	private: float first_num;
 	private: char user_action = ' ';
 	private: bool is_equal = false;
@@ -100,14 +98,12 @@ namespace FirstCLRProject {
 
 	private:
 		/// <summary>
-		/// Обязательная переменная конструктора.
+	
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -479,7 +475,7 @@ namespace FirstCLRProject {
 		math_action('+');
 	}
 	private: System::Void button_result_Click(System::Object^  sender, System::EventArgs^  e) {
-		// фикс нажатия на равно при 1-м введенном числе
+		// ГґГЁГЄГ± Г­Г Г¦Г ГІГЁГї Г­Г  Г°Г ГўГ­Г® ГЇГ°ГЁ 1-Г¬ ГўГўГҐГ¤ГҐГ­Г­Г®Г¬ Г·ГЁГ±Г«ГҐ
 		if (user_action == ' ' || this->lable_result->Text == " ")
 			return;
 		float second = System::Convert::ToDouble(this->lable_result->Text);
@@ -489,7 +485,7 @@ namespace FirstCLRProject {
 			if (second == 0) {
 				lable_result->Text = "0";
 				this->lable_result->ForeColor = Color::Red;
-				MessageBox::Show(this, "Деление на 0 запрещено", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show(this, "Г„ГҐГ«ГҐГ­ГЁГҐ Г­Г  0 Г§Г ГЇГ°ГҐГ№ГҐГ­Г®", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 			else {
 			this->first_num / second;
